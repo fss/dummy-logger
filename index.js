@@ -3,12 +3,14 @@ const express = require('express')
 const app = express()
 
 app.use((httpReq, httpRes) => {
-  console.log(httpReq.method.toUpperCase(), {
+  const method = httpReq.method.toUpperCase()
+  const res = {
     path: httpReq.path,
     body: httpReq.body,
     query: httpReq.query
-  })
-  httpRes.json({ OK: true })
+  }
+  console.log(`${new Date()}`, method, res)
+  httpRes.json({ method, ...res })
 })
 
 app.listen(9999, () => {
